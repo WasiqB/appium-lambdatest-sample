@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="LambdaTest Mobile Suite" verbose="2">
+    <test name="Test iOS App on LambdaTest">
+        <classes>
+            <class name="com.lambdatest.appium.sample.ios.IOSTest"/>
+        </classes>
+    </test>
+</suite>
