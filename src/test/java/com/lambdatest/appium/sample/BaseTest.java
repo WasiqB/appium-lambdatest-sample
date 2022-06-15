@@ -32,14 +32,15 @@ public class BaseTest<D extends AppiumDriver<MobileElement>> {
         this.driver.quit ();
     }
 
-    protected Capabilities getIOSOptions () {
+    protected Capabilities getOptions (final String platform, final String deviceName, final String version,
+        final String appKey) {
         final DesiredCapabilities capabilities = new DesiredCapabilities ();
-        capabilities.setCapability (PLATFORM_NAME, "iOS");
-        capabilities.setCapability (PLATFORM_VERSION, "15");
-        capabilities.setCapability (DEVICE_NAME, "iPhone 13 Pro");
-        capabilities.setCapability (APP, getenv ("LT_APP_IOS"));
-        capabilities.setCapability ("build", "TestNG iOS Sample Build");
-        capabilities.setCapability ("name", "iOS Test Case");
+        capabilities.setCapability (PLATFORM_NAME, platform);
+        capabilities.setCapability (PLATFORM_VERSION, version);
+        capabilities.setCapability (DEVICE_NAME, deviceName);
+        capabilities.setCapability (APP, getenv (appKey));
+        capabilities.setCapability ("build", format ("TestNG {0} Sample Build", platform));
+        capabilities.setCapability ("name", format ("{0} Test Case", platform));
         capabilities.setCapability ("console", true);
         capabilities.setCapability ("network", true);
         capabilities.setCapability ("visual", true);
