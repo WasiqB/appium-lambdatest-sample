@@ -14,6 +14,7 @@ import com.lambdatest.appium.sample.pages.HomePage;
 import com.lambdatest.appium.sample.pages.Platform;
 import com.lambdatest.appium.sample.utils.Swipe;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.Setting;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeTest;
@@ -28,6 +29,7 @@ public class AndroidTest extends BaseTest<AndroidDriver<MobileElement>> {
         this.homePage = new HomePage ();
         this.driver = new AndroidDriver<> (new URL (format (BaseTest.URL, BaseTest.LT_USER, BaseTest.LT_KEY)),
             getOptions ("Android", "Galaxy S10", "10", "LT_APP_ANDROID"));
+        this.driver.setSetting (Setting.IGNORE_UNIMPORTANT_VIEWS, true);
         this.wait = new WebDriverWait (this.driver, 10);
         this.swipe = new Swipe<> (this.driver);
     }
