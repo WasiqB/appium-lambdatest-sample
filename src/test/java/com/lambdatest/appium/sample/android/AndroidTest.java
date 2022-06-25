@@ -1,34 +1,36 @@
 package com.lambdatest.appium.sample.android;
 
-import static com.lambdatest.appium.sample.pages.Platform.ANDROID;
-import static java.text.MessageFormat.format;
+import static com.lambdatest.appium.sample.enums.Platform.ANDROID;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 import static org.testng.Assert.assertEquals;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import com.lambdatest.appium.sample.BaseTest;
+import com.lambdatest.appium.sample.enums.Environment;
+import com.lambdatest.appium.sample.enums.Platform;
 import com.lambdatest.appium.sample.pages.HomePage;
-import com.lambdatest.appium.sample.pages.Platform;
 import com.lambdatest.appium.sample.utils.Swipe;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.Setting;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class AndroidTest extends BaseTest<AndroidDriver<MobileElement>> {
     private static final Platform PLATFORM = ANDROID;
     private              HomePage homePage;
 
+    @Parameters ({ "environment", "deviceName", "version", "app", "isAutomatic" })
     @BeforeTest
-    public void setupDriver () throws MalformedURLException {
+    public void setupDriver (final Environment environment, final String deviceName, final String version,
+        final String app, final boolean isAutomatic) {
         this.homePage = new HomePage ();
-        this.driver = new AndroidDriver<> (new URL (format (BaseTest.URL, BaseTest.LT_USER, BaseTest.LT_KEY)),
-            getOptions ("Android", "Galaxy S10", "10", "LT_APP_ANDROID"));
+        startServer (environment, isAutomatic);
+        System.out.println (getUrl (environment));
+        this.driver = new AndroidDriver<> (getUrl (environment),
+            getOptions (environment, "Android", deviceName, version, app));
         this.driver.setSetting (Setting.IGNORE_UNIMPORTANT_VIEWS, true);
         this.wait = new WebDriverWait (this.driver, 10);
         this.swipe = new Swipe<> (this.driver);

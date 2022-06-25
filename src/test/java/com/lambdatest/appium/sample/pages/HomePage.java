@@ -3,6 +3,7 @@ package com.lambdatest.appium.sample.pages;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
+import com.lambdatest.appium.sample.enums.Platform;
 import io.appium.java_client.MobileBy;
 import org.openqa.selenium.By;
 

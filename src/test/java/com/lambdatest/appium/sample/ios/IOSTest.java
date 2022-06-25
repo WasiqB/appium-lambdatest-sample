@@ -1,33 +1,32 @@
 package com.lambdatest.appium.sample.ios;
 
-import static com.lambdatest.appium.sample.pages.Platform.IOS;
+import static com.lambdatest.appium.sample.enums.Platform.IOS;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.MessageFormat;
-
 import com.lambdatest.appium.sample.BaseTest;
+import com.lambdatest.appium.sample.enums.Environment;
+import com.lambdatest.appium.sample.enums.Platform;
 import com.lambdatest.appium.sample.pages.HomePage;
-import com.lambdatest.appium.sample.pages.Platform;
 import com.lambdatest.appium.sample.utils.Swipe;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class IOSTest extends BaseTest<IOSDriver<MobileElement>> {
     private static final Platform PLATFORM = IOS;
     private              HomePage homePage;
 
+    @Parameters ({ "environment", "deviceName", "version", "app" })
     @BeforeTest
-    public void setupDriver () throws MalformedURLException {
+    public void setupDriver (final Environment environment, final String deviceName, final String version,
+        final String app) {
         this.homePage = new HomePage ();
-        this.driver = new IOSDriver<> (new URL (MessageFormat.format (BaseTest.URL, BaseTest.LT_USER, BaseTest.LT_KEY)),
-            getOptions ("iOS", "iPhone 13 Pro", "15", "LT_APP_IOS"));
+        this.driver = new IOSDriver<> (getUrl (environment), getOptions (environment, "iOS", deviceName, version, app));
         this.wait = new WebDriverWait (this.driver, 10);
         this.swipe = new Swipe<> (this.driver);
     }

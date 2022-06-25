@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="LambdaTest Mobile Suite" verbose="2" parallel="tests" thread-count="2">
+<suite name="LambdaTest Mobile Suite" verbose="2" parallel="tests">
     <test name="Test iOS App on LambdaTest">
+        <parameter name="environment" value="CLOUD"/>
+        <parameter name="deviceName" value="iPhone 13 Pro"/>
+        <parameter name="version" value="15"/>
+        <parameter name="app" value="LT_APP_IOS"/>
+        <parameter name="isAutomatic" value="false"/>
         <classes>
             <class name="com.lambdatest.appium.sample.ios.IOSTest"/>
         </classes>
     </test>
     <test name="Test Android App on LambdaTest">
+        <parameter name="environment" value="CLOUD"/>
+        <parameter name="deviceName" value="Galaxy S10"/>
+        <parameter name="version" value="10"/>
+        <parameter name="app" value="LT_APP_ANDROID"/>
+        <parameter name="isAutomatic" value="false"/>
+        <classes>
+            <class name="com.lambdatest.appium.sample.android.AndroidTest"/>
+        </classes>
+    </test>
+    <test name="Test Android App on Local">
+        <parameter name="environment" value="LOCAL"/>
+        <parameter name="deviceName" value="Pixel_5"/>
+        <parameter name="version" value="10"/>
+        <parameter name="app" value="/src/test/resources/apps/proverbial_android.apk"/>
+        <parameter name="isAutomatic" value="true"/>
         <classes>
             <class name="com.lambdatest.appium.sample.android.AndroidTest"/>
         </classes>

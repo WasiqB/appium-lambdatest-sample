@@ -1,4 +1,4 @@
-package com.lambdatest.appium.sample.pages;
+package com.lambdatest.appium.sample.enums;
 
 public enum Platform {
     IOS,
