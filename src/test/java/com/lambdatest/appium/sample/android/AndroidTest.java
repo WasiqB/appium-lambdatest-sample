@@ -5,6 +5,8 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClick
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 import static org.testng.Assert.assertEquals;
 
+import java.net.MalformedURLException;
+
 import com.lambdatest.appium.sample.BaseTest;
 import com.lambdatest.appium.sample.enums.Environment;
 import com.lambdatest.appium.sample.enums.Platform;
@@ -25,7 +27,7 @@ public class AndroidTest extends BaseTest<AndroidDriver<MobileElement>> {
     @Parameters ({ "environment", "deviceName", "version", "app", "isAutomatic" })
     @BeforeTest
     public void setupDriver (final Environment environment, final String deviceName, final String version,
-        final String app, final boolean isAutomatic) {
+        final String app, final boolean isAutomatic) throws MalformedURLException {
         this.homePage = new HomePage ();
         startServer (environment, isAutomatic);
         System.out.println (getUrl (environment));

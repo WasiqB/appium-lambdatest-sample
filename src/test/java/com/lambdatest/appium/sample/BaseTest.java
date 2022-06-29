@@ -3,6 +3,7 @@ package com.lambdatest.appium.sample;
 import static java.text.MessageFormat.format;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import com.lambdatest.appium.sample.enums.Environment;
@@ -15,7 +16,6 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
-import lombok.SneakyThrows;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -66,8 +66,7 @@ public class BaseTest<D extends AppiumDriver<MobileElement>> {
         return capabilities;
     }
 
-    @SneakyThrows
-    protected URL getUrl (final Environment environment) {
+    protected URL getUrl (final Environment environment) throws MalformedURLException {
         if (environment == Environment.CLOUD) {
             return new URL (format ("https://{0}:{1}@mobile-hub.lambdatest.com/wd/hub", LT_USER, LT_KEY));
         }

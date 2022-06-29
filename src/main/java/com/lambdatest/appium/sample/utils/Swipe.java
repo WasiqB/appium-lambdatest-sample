@@ -8,13 +8,15 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
-import lombok.AllArgsConstructor;
 import org.openqa.selenium.Dimension;
 
 @SuppressWarnings ("rawtypes")
-@AllArgsConstructor
 public class Swipe<D extends AppiumDriver<MobileElement>> {
-    private D driver;
+    private final D driver;
+
+    public Swipe (final D driver) {
+        this.driver = driver;
+    }
 
     public void down () {
         final Dimension screenDimension = this.driver.manage ()

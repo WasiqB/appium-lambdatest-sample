@@ -4,6 +4,8 @@ import static com.lambdatest.appium.sample.enums.Platform.IOS;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
+import java.net.MalformedURLException;
+
 import com.lambdatest.appium.sample.BaseTest;
 import com.lambdatest.appium.sample.enums.Environment;
 import com.lambdatest.appium.sample.enums.Platform;
@@ -24,7 +26,7 @@ public class IOSTest extends BaseTest<IOSDriver<MobileElement>> {
     @Parameters ({ "environment", "deviceName", "version", "app" })
     @BeforeTest
     public void setupDriver (final Environment environment, final String deviceName, final String version,
-        final String app) {
+        final String app) throws MalformedURLException {
         this.homePage = new HomePage ();
         this.driver = new IOSDriver<> (getUrl (environment), getOptions (environment, "iOS", deviceName, version, app));
         this.wait = new WebDriverWait (this.driver, 10);
