@@ -24,15 +24,15 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterTest;
 
 public class BaseTest<D extends AppiumDriver<MobileElement>> {
-    protected static final String                   LT_KEY      = System.getenv ("LT_KEY");
-    protected static final String                   LT_USER     = System.getenv ("LT_USER");
-    protected static final String                   SESSION_URL = "https://{0}:{1}@{2}/wd/hub";
-    protected              D                        driver;
-    protected              AppiumDriverLocalService service;
-    protected              Swipe<D>                 swipe;
-    protected              WebDriverWait            wait;
+    protected static final String LT_KEY  = System.getenv ("LT_KEY");
+    protected static final String LT_USER = System.getenv ("LT_USER");
 
-    @AfterTest
+    protected D                        driver;
+    protected AppiumDriverLocalService service;
+    protected Swipe<D>                 swipe;
+    protected WebDriverWait            wait;
+
+    @AfterTest (alwaysRun = true)
     public void tearDown (final ITestContext context) {
         if (Environment.valueOf (context.getCurrentXmlTest ()
             .getParameter ("environment")) == Environment.CLOUD) {
@@ -83,6 +83,8 @@ public class BaseTest<D extends AppiumDriver<MobileElement>> {
         final AppiumServiceBuilder builder = new AppiumServiceBuilder ();
         builder.withIPAddress ("127.0.0.1")
             .usingPort (4723)
+            .withAppiumJS (
+                new File ("/Users/wasiqbhamla/.nvm/versions/node/v16.15.0/lib/node_modules/appium/build/lib/main.js"))
             .withLogFile (new File (System.getProperty ("user.dir") + "/logs/appium.log"))
             .withArgument (GeneralServerFlag.LOG_LEVEL, "info")
             .withArgument (GeneralServerFlag.SESSION_OVERRIDE);
@@ -98,6 +100,7 @@ public class BaseTest<D extends AppiumDriver<MobileElement>> {
         capabilities.setCapability ("visual", true);
         capabilities.setCapability ("video", true);
         capabilities.setCapability ("terminal", true);
+        capabilities.setCapability ("devicelog", true);
         capabilities.setCapability ("isRealMobile", true);
     }
 
