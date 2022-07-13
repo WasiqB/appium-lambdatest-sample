@@ -24,8 +24,8 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterTest;
 
 public class BaseTest<D extends AppiumDriver<MobileElement>> {
-    protected static final String LT_KEY  = System.getenv ("LT_KEY");
-    protected static final String LT_USER = System.getenv ("LT_USER");
+    protected static final String LT_KEY  = System.getenv ("LT_ACCESS_KEY");
+    protected static final String LT_USER = System.getenv ("LT_USERNAME");
 
     protected D                        driver;
     protected AppiumDriverLocalService service;
@@ -93,6 +93,7 @@ public class BaseTest<D extends AppiumDriver<MobileElement>> {
     }
 
     private void setCapabilitiesForCloud (final DesiredCapabilities capabilities, final Object platform) {
+        capabilities.setCapability ("project", "LambdaTest project");
         capabilities.setCapability ("build", format ("TestNG {0} Sample Build", platform));
         capabilities.setCapability ("name", format ("{0} Test Case", platform));
         capabilities.setCapability ("console", true);
